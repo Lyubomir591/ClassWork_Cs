@@ -337,27 +337,85 @@
 // SumArrayElement(array);
 //Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.
 
-int[] LengthArray(int numberLength)
-{
-    return new int[numberLength];
-}
-void FillArray(int[] array)
-{
-    int length = array.Length;
-    for (int i = 0; i < length; i++)
-    {
-        array[i] = new Random().Next(10, 20);
-    }
-    Console.WriteLine(String.Join(',', array));
-};
-void Difference(int[] array)
-{
-    int min = array.Min();
-    int max = array.Max();
-    int raz = max - min;
-    Console.WriteLine(raz);
+int[,] array = new int[4, 4];
+// void FillArray(int[,] array)
+// {
+//     int length = array.GetLength(0);
+//     for (int i = 0; i < length; i++)
+//         for (int j = 0; j < array.GetLength(1); i++)
+//         {
+//             array[i, j] = new Random().Next(1, 25);
+//         }
+//     {
 
+//     }
+// }
+// void OutputArray(int[,] array)
+// {
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         Console.WriteLine();
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//             array[i, j] = new Random().Next(1, 7);
+//             Console.Write(array[i, j] + " ");
+//         }
+
+//     }
+// }
+
+// OutputArray(array);
+// int[] Array = { 0, 1, 2, 3, 4, 4, 5, 5, 5, 6, 7, 1, 1, 4, 7, 9, 9, 9, 6 };
+// int[] count = new int[Array.Max() + 1];
+// int length = Array.Length;
+// for (int i = 0; i < length; i++)
+// {
+//     count[Array[i]]++;
+// }
+// for (int j = 0; j < count.Length; j++)
+// {
+//     if (count[j] != 0)
+//     {
+//         Console.WriteLine($"{j} Встречается {count[j]} - раз");
+//     }
+// }
+//_________________________________________________________________________________
+// Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
+// 0, 7, 8, -2, -2 -> 2
+// 1, -7, 567, 89, 223-> 3
+
+void PrintData(int[] inputArray)
+{
+    for (int i = 0; i < inputArray.Length; i++)
+        Console.Write($"{inputArray[i]} ");
+    Console.WriteLine();
 }
-int[] array = LengthArray(10);
-FillArray(array);
-Difference(array);
+
+int[] GetData(string line)
+{
+    Console.WriteLine(line);
+    string inputArray = Console.ReadLine() ?? "";
+    string[] numberArray = inputArray.Split(", ");
+    int[] numbers = new int[numberArray.Length];
+    bool correctInput = false;
+    for (int i = 0; i < numberArray.Length; i++)
+        correctInput = int.TryParse(numberArray[i], out numbers[i]);
+    if (!correctInput)
+        Console.WriteLine("Введите корректное число");
+    return numbers;
+}
+
+void PositiveNumbers(int[] inputArr)
+{
+    int sum = 0;
+    for (int i = 0; i < inputArr.Length; i++)
+    {
+        if (inputArr[i] > 0)
+            sum++;
+    }
+    Console.WriteLine($"чисел больше 0: {sum}");
+}
+
+int[] arr = GetData("Введите числа через запятую: ");
+PrintData(arr);
+PositiveNumbers(arr);
