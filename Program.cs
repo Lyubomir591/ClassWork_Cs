@@ -423,39 +423,212 @@ int[,] array = new int[4, 4];
 значения b1, k1, b2 и k2 задаются пользователем.
 b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5) */
 
-double[] GetData(string line)
+// double[] GetData(string line)
+// {
+//     Console.WriteLine(line);
+//     string inputArray = Console.ReadLine() ?? "";
+//     string[] numberArray = inputArray.Split(',');
+//     double[] numbers = new double[numberArray.Length];
+//     bool correctInput = false;
+//     for (int i = 0; i < numberArray.Length; i++)
+//         correctInput = double.TryParse(numberArray[i], out numbers[i]);
+//     if (!correctInput)
+//         Console.WriteLine("Введите корректное число");
+//     return numbers;
+// }
+// void PrintData(double[] arr)
+// {
+//     for (int i = 0; i < arr.Length; i++)
+//     {
+//         Console.Write($"{arr[i]}");
+//     }
+//     Console.WriteLine();
+// }
+
+// void Intersection(double[] inputArray)
+// {
+//     double bOne = inputArray[0];
+//     double kOne = inputArray[1];
+//     double bTwo = inputArray[2];
+//     double kTwo = inputArray[3];
+//     double x = (bTwo - bOne) / (kOne - kTwo);
+//     double y = (kOne * x) + bOne;
+//     Console.WriteLine($"координаты точки пересечения: ({x},{y})");
+// }
+
+// double[] coef = GetData("Введите значения b1, k1, b2, k2 через запятую: ");
+// PrintData(coef);
+// Intersection(coef);
+//_______________________________________________________________________________________lesson 7
+/* Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+m = 3, n = 4.
+0,5 7 -2 -0,2
+1 -3,3 8 -9,9
+8 7,8 -7,1 9 */
+
+// функция, которая выводит двухмерный массив в консоль
+// void PrintArray(double[,] inputArray)
+// {
+//     for (int i = 0; i < inputArray.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < inputArray.GetLength(1); j++)
+//         {
+//             Console.Write($"{inputArray[i, j]} \t");
+//         }
+//         Console.WriteLine();
+//     }
+// }
+
+// // генератор массива случайных положительных вещественных чисел от 0 до 10 (1), 100(2), 1000(3) и т.д.
+// double[,] ArrayGenerator(int lines, int columns, int digitNumber)
+// {
+//     double[,] result = new double[lines, columns];
+//     for (int i = 0; i < lines; i++)
+//     {
+//         for (int j = 0; j < columns; j++)
+//         {
+//             double factor = new Random().Next(-1, 2); // для создания возможности появления отрицательных чисел
+//             result[i, j] = Math.Round((new Random().NextDouble() * Math.Pow(10, digitNumber) * factor), 2);
+//         }
+//     }
+//     return result;
+// }
+
+// int m = 3;
+// int n = 4;
+// int p = 1;
+// double[,] myArr = ArrayGenerator(m, n, p);
+// PrintArray(myArr);
+/* Задача 50. Напишите программу, которая на вход принимает число и возвращает позицию (i, j) этого элемента или же указание, что такого элемента нет.
+Например, задан массив:
+1 4 7 2
+5 9 2 3
+8 4 2 4
+17 -> такого числа в массиве нет
+*/
+
+// функция, которая выводит двухмерный массив в консоль
+// void PrintArray(double[,] inputArray)
+// {
+//     for (int i = 0; i < inputArray.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < inputArray.GetLength(1); j++)
+//         {
+//             Console.Write($"{inputArray[i, j]} \t");
+//         }
+//         Console.WriteLine();
+//     }
+// }
+
+// // генератор массива случайных положительных вещественных чисел от 0 до 10 (1), 100(2), 1000(3) и т.д.
+// double[,] ArrayGenerator(int lines, int columns, int digitNumber)
+// {
+//     double[,] result = new double[lines, columns];
+//     for (int i = 0; i < lines; i++)
+//     {
+//         for (int j = 0; j < columns; j++)
+//         {
+//             double factor = new Random().Next(-1, 2); // для создания возможности появления отрицательных чисел
+//             result[i, j] = Math.Round((new Random().NextDouble() * Math.Pow(10, digitNumber) * factor), 2);
+//         }
+//     }
+//     return result;
+// }
+
+// void ReturnPosition(double[,] inputArray)
+// {
+//     Console.WriteLine("Enter the number to search within the array: ");
+//     bool correctInput = false;
+//     bool isFound = false;
+//     double number = 0;
+//     correctInput = double.TryParse(Console.ReadLine(), out number);
+//     if (!correctInput)
+//         Console.WriteLine("enter a valid number!");
+//     for (int i = 0; i < inputArray.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < inputArray.GetLength(1); j++)
+//         {
+//             if (inputArray[i, j] == number)
+
+//             {
+//                 Console.WriteLine($"Index is: {i}, {j}");
+//                 isFound = true;
+//             }
+//         }
+//     }
+//     if(!isFound)
+//         Console.WriteLine("No such element within the array!");
+// }
+
+// int m = 3;
+// int n = 4;
+// int p = 1;
+// double[,] myArr = ArrayGenerator(m, n, p);
+// PrintArray(myArr);
+// ReturnPosition(myArr);
+/* Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+Например, задан массив:
+1 4 7 2
+5 9 2 3
+8 4 2 4
+Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+*/
+
+int[,] GenerateIntArray (int rows, int columns)
 {
-    Console.WriteLine(line);
-    string inputArray = Console.ReadLine() ?? "";
-    string[] numberArray = inputArray.Split(',');
-    double[] numbers = new double[numberArray.Length];
-    bool correctInput = false;
-    for (int i = 0; i < numberArray.Length; i++)
-        correctInput = double.TryParse(numberArray[i], out numbers[i]);
-    if (!correctInput)
-        Console.WriteLine("Введите корректное число");
-    return numbers;
-}
-void PrintData(double[] arr)
-{
-    for (int i = 0; i < arr.Length; i++)
+    int[,] outputArr = new int [rows, columns];
+    for (int i = 0; i < rows; i++)
     {
-        Console.Write($"{arr[i]}");
+        for (int j = 0; j < columns; j++)
+            outputArr[i, j]=new Random().Next(0, 11);
     }
-    Console.WriteLine();
+    return outputArr;
 }
 
-void Intersection(double[] inputArray)
+void PrintMatrix (int[,] inputMatrix)
 {
-    double bOne = inputArray[0];
-    double kOne = inputArray[1];
-    double bTwo = inputArray[2];
-    double kTwo = inputArray[3];
-    double x = (bTwo - bOne) / (kOne - kTwo);
-    double y = (kOne * x) + bOne;
-    Console.WriteLine($"координаты точки пересечения: ({x},{y})");
+    for (int i = 0; i < inputMatrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < inputMatrix.GetLength(1); j++)
+            Console.Write($"{inputMatrix[i,j]} \t");
+        Console.WriteLine();
+    }
 }
 
-double[] coef = GetData("Введите значения b1, k1, b2, k2 через запятую: ");
-PrintData(coef);
-Intersection(coef);
+double Average(int[] inputArray)
+{
+    double sum = 0;
+    for (int i = 0; i < inputArray.Length; i++)
+        sum = sum + inputArray[i];
+    return Math.Round(sum / Convert.ToDouble(inputArray.Length), 2);
+}
+
+int[] ColumnExtractor (int colNumber, int[,] inputMat)
+{
+    int[] column = new int[inputMat.GetLength(0)];
+    for (int i = 0; i < inputMat.GetLength(0); i++)
+        column[i]=inputMat[i, colNumber];
+    return column;
+}
+
+double[] ColumnAverage (int[,] inputMatr)
+{
+    double[] avgArray = new double[inputMatr.GetLength(1)];
+    for (int i = 0; i < inputMatr.GetLength(1); i++)
+    {
+        avgArray[i]=Average(ColumnExtractor(i, inputMatr));
+    }
+    return avgArray;
+}
+
+void VectorPrint(double[] inputVec)
+{
+    for (int i = 0; i < inputVec.Length; i++)
+        Console.Write($"{inputVec[i]} \t");
+}
+
+int[,] testArr = GenerateIntArray(3, 4);
+PrintMatrix(testArr);
+Console.WriteLine();
+double[] avgVector = ColumnAverage(testArr);
+VectorPrint(avgVector);
