@@ -972,7 +972,7 @@ m = 3, n = 4.
 // SumArrayElement(array);
 //Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.
 
-int[,] array = new int[4, 4];
+// int[,] array = new int[4, 4];
 // void FillArray(int[,] array)
 // {
 //     int length = array.GetLength(0);
